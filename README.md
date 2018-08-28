@@ -2,7 +2,7 @@
 ### 图形面板编辑，可在线画图；
 
 # Version
-### 
+### 1.0.0
 
 # Start
 ### npm install
