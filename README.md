@@ -1,11 +1,14 @@
 # drawing
-###图形面板编辑，可在线画图；
+### 图形面板编辑，可在线画图；
 
-#Start
-###npm install
-###npm run dev
+# Version
+### 
 
-#特效处理
-###1.灰度
-###2.扩散
-###3.旧照片
+# Start
+### npm install
+### npm run dev
+
+# Processing
+### 1.灰度
+### 2.扩散
+### 3.旧照片
