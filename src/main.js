@@ -3,12 +3,15 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import MuseUI from 'muse-ui'
-import 'muse-ui/dist/muse-ui.css'
+// import MuseUI from 'muse-ui'
+// import 'muse-ui/dist/muse-ui.css'
 import store from './components/draw/store/index.js'
 
+import ElementUI from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
-Vue.use(MuseUI)
+// Vue.use(MuseUI)
+Vue.use(ElementUI)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
