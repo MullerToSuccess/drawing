@@ -7,11 +7,15 @@ import router from './router'
 // import 'muse-ui/dist/muse-ui.css'
 import store from './components/draw/store/index.js'
 
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+// import ElementUI from 'element-ui';
+// import 'element-ui/lib/theme-chalk/index.css';
 
+import Vant from 'vant';
+import 'vant/lib/vant-css/index.css';
+
+Vue.use(Vant);
 // Vue.use(MuseUI)
-Vue.use(ElementUI)
+// Vue.use(ElementUI)
 Vue.config.productionTip = false
 /* eslint-disable no-new */
 new Vue({
@@ -19,5 +23,15 @@ new Vue({
   router,
   store,
   template: '<App/>',
-  components: { App}
+  components: { App }
 })
+// document.addEventListener('deviceready', function() {
+//   new Vue({
+//       el: '#app',
+//       router,
+//       store,
+//       template: '<App/>',
+//       components: { App }
+//   })
+//   window.navigator.splashscreen.hide()
+// }, false);

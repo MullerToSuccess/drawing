@@ -4,6 +4,14 @@ import draw from '@/components/draw/draw'
 import wechat from '@/components/wechat/wechat'
 import author from '@/components/author/author'
 import userInfo from '@/components/userInfo/userInfo'
+import setUserInfo from '@/components/userInfo/setUserInfo'
+import setUserBinding from '@/components/userInfo/setUserBinding'
+import studentList from '@/components/student/studentList'
+import comStudents from '@/components/comment/comStudents'
+import count from '@/components/count/count'
+import my from '@/components/my/my'
+
+
 Vue.use(Router)
 
 
@@ -25,6 +33,30 @@ const router = new Router({
       path: '/userInfo',
       name: 'userInfo',
       component: userInfo
+    }, {
+      path: '/userInfo/setInfo',
+      name: 'setUserInfo',
+      component: setUserInfo
+    }, {
+      path: '/userInfo/setBinding',
+      name: 'setUserBinding',
+      component: setUserBinding
+    }, {
+      path: '/studentList',
+      name: 'studentList',
+      component: studentList
+    }, {
+      path: '/comStudents',
+      name: 'comStudents',
+      component: comStudents
+    }, {
+      path: '/count',
+      name: 'count',
+      component: count
+    }, {
+      path: '/my',
+      name: 'my',
+      component: my
     }
   ]
 })
