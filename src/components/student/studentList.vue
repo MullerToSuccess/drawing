@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import scroll from '../common/components/scroll'
 export default {
   data() {
     return {
@@ -137,7 +138,9 @@ export default {
     
   },
   mounted: function() {},
-  components: {}
+  components: {
+    scroll
+  }
 };
 </script>
 <style  lang="scss" scoped>
@@ -235,5 +238,9 @@ export default {
       color: #eebb45;
     }
   }
+}
+.tab-text>div{
+  width: 40%;
+  display: inline-block;
 }
 </style>
