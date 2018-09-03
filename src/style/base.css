@@ -1,0 +1,186 @@
+@charset "UTF-8";
+/*常用------------------------------------------*/
+.fl {
+  float: left;
+}
+
+.fr {
+  float: right;
+}
+
+.flex {
+  display: flex;
+}
+
+.flex > .f-1 {
+  flex: 1 1 0;
+}
+
+/*字号-----------------------------------------*/
+.font-h1 {
+  font-size: 19px;
+}
+
+.font-h2 {
+  font-size: 17px;
+}
+
+.font-h3 {
+  font-size: 15px;
+}
+
+.font-h4 {
+  font-size: 13px;
+}
+
+.font-h5 {
+  font-size: 11px;
+}
+
+.font-h6 {
+  font-size: 9px;
+}
+
+.font-h7 {
+  font-size: 7px;
+}
+
+.font-h8 {
+  font-size: 5px;
+}
+
+/*按钮-----------------------------------------*/
+.btn {
+  width: 150px;
+  display: inline-block;
+  color: #fff;
+  height: 50px;
+  line-height: 50px;
+  border-radius: 13px;
+  font-size: 17px;
+  text-align: center;
+}
+
+.btn.bg-green {
+  background-color: #08b783;
+}
+
+.btn.bg-green:active, .btn.bg-green.active {
+  background-color: #13d098;
+}
+
+.btn.bg-green.disable {
+  background-color: rgba(19, 208, 152, 0.5);
+}
+
+.btn.bg-yellow {
+  background-color: #ff8d13;
+}
+
+.btn.bg-yellow:active, .btn.bg-yellow.active {
+  background-color: #ffa94d;
+}
+
+.btn.bg-yellow.disable {
+  background-color: rgba(255, 169, 77, 0.5);
+}
+
+.btn.bg-blue {
+  background-color: #3ea2ff;
+}
+
+.btn.bg-blue:active, .btn.bg-blue.active {
+  background-color: #75dbff;
+}
+
+.btn.bg-blue.disable {
+  background-color: rgba(117, 219, 255, 0.5);
+}
+
+.btn.bg-bluegreen {
+  background-color: #08b783;
+}
+
+.btn.bg-bluegreen:active, .btn.bg-bluegreen.active {
+  background-color: #13d098;
+}
+
+.btn.bg-bluegreen.disable {
+  background-color: rgba(19, 208, 152, 0.5);
+}
+
+.btn.bg-red {
+  background-color: #ff5266;
+}
+
+.btn.bg-red:active, .btn.bg-red.active {
+  background-color: #ff7080;
+}
+
+.btn.bg-red.disable {
+  background-color: rgba(255, 112, 128, 0.5);
+}
+
+/*1行排1个*/
+.btn-w1 {
+  width: 180px;
+}
+
+/*1行排2个*/
+.btn-w2 {
+  width: 150px;
+}
+
+/*1行排3个*/
+.btn-w3 {
+  width: 100px;
+}
+
+/*页面布局-----------------------------------------*/
+.spa {
+  padding: 0 13px;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #f5f7f8;
+}
+
+/*图标-----------------------------------------*/
+.icon {
+  display: inline-block;
+  background-size: 100% 100%;
+  background-position: center center;
+  background-repeat: no-repeat;
+}
+
+.icon.message {
+  background-image: url("../assets/images/home/message.png");
+}
+
+.icon.message.new {
+  background-image: url("../assets/images/home/message-new.png");
+}
+
+.icon.scan {
+  background-image: url("../assets/images/home/scan.png");
+}
+
+.icon.homework {
+  background-image: url("../assets/images/home/homework.png");
+}
+
+.icon.iclass {
+  background-image: url("../assets/images/home/iclass.png");
+}
+
+.icon.iclass-record {
+  background-image: url("../assets/images/home/iclass-record.png");
+}
+
+.icon.wrong {
+  background-image: url("../assets/images/home/wrong.png");
+}
+
+.icon.ask {
+  background-image: url("../assets/images/home/ask.png");
+}

@@ -2,6 +2,7 @@
 
 <van-popup v-model="isShow" @click-overlay='overlay'>
 <div class="comment-content">
+  <div class="comTitle">点评 <span class="comName">{{ this.checkedName.length > 0 ? this.checkedName[0].studentName : '' }}</span><div @click="close" class="comClose">X</div></div>
     <van-tabs v-model="active">
   <van-tab title='表扬'></van-tab>
   <van-tab title='警告'></van-tab>
@@ -45,9 +46,12 @@ export default {
   //   computed:{
   //       isShow
   //   },
-  props: ["isShow"],
+  props: ["isShow", "checkedName"],
   methods: {
     overlay() {
+      this.$emit("cancelPop");
+    },
+    close(){
       this.$emit("cancelPop");
     }
     // beforeClose(action, done) {
@@ -64,8 +68,20 @@ export default {
 };
 </script>
 <style scoped>
+.comName{
+  /* color: #cccccc; */
+  font-size: calc(16px);
+}
+.comClose {
+  float: right;
+  margin-right:calc(8px/2)
+}
+.comTitle {
+  margin-top: calc(2px);
+  text-align: center;
+}
 .van-tab {
-    display: inline-block;
+  display: inline-block;
 }
 .comment-card {
   text-align: center;

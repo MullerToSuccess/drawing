@@ -1,0 +1,67 @@
+@import "./variable";
+.van-toast{
+  font-size: calc(34px/2) !important;
+}
+#home{
+  .van-swipe__indicator{
+    width: calc(15px/2) !important;
+    height: calc(15px/2) !important;
+    margin-right: calc(10px/2) !important;
+  }
+}
+#waiting-management{
+  .van-tabs--line .van-tabs__wrap{
+    height: calc(100px/2) !important;
+    line-height: calc(100px/2) !important;
+  }
+  .van-tab{
+    font-size: calc(28px/2) !important;
+  }
+  .van-tab,.van-ellipsis{
+    line-height: calc(100px/2) !important;
+  }
+  .van-tab--active{
+    color: #25d6e3 !important;
+  }
+  .van-tabs__line{
+    background-color: #25d6e3 !important;
+  }
+}
+#add-class,#t-subject{
+  .van-tabs__wrap{
+    z-index: 0;
+  }
+  .van-tabs--card .van-tabs__wrap{
+    height: calc(65px/2);
+    .van-tabs__nav--card{
+      height: calc(65px/2);
+      margin: 0;
+      border: 0;
+      .van-tab{
+        margin-right: calc(15px/2);
+        line-height: calc(65px/2);
+        font-size: calc(26px/2);
+        color: $color-text-d;
+        background: #fff;
+        border: calc(1px/2) solid $color-line;
+        border-radius: calc(15px/2);
+      }
+      .van-tab--active{
+        color: #fff;
+        background: $green-primary-color;
+      }
+    }
+  }
+}
+#t-subject{
+  .van-tab{
+    font-size: calc(34px/2) !important;
+  }
+}
+.van-picker-column{
+  font-size: calc(34px/2) !important;
+}
+.van-picker__toolbar{
+  height: calc(60px/2) !important;
+  line-height: calc(60px/2) !important;
+}

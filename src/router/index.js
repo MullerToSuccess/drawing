@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import draw from '@/components/draw/draw'
+// import draw from '@/components/draw/draw'
+import login from '@/components/login/login'
 import wechat from '@/components/wechat/wechat'
 import author from '@/components/author/author'
 import userInfo from '@/components/userInfo/userInfo'
@@ -18,9 +19,9 @@ Vue.use(Router)
 const router = new Router({
   routes: [
     {
-      path: '/',
-      name: 'draw',
-      component: draw
+      path: '/login',
+      name: 'login',
+      component: login
     }, {
       path: '/wechat',
       name: 'wechat',

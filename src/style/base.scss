@@ -1,0 +1,105 @@
+@import './common/var.scss';
+@import './common/mixin.scss';
+
+/*常用------------------------------------------*/
+.fl{
+    float: left;
+}
+.fr{
+    float: right;
+}
+.flex{
+    display: flex;
+}
+
+.flex>.f-1{
+    flex:1 1 0;
+}
+
+
+/*字号-----------------------------------------*/
+@for $i from 1 through 8 {
+    .font-h#{$i} {
+        font-size:#{19 -$i*2+1*2}px
+    }
+}
+
+
+
+/*按钮-----------------------------------------*/
+.btn{
+    &.bg-green{
+      @include color($green,$green-active,$green-disable);
+    }
+    &.bg-yellow{
+      @include color($yellow,$yellow-active,$yellow-disable);
+    }
+    &.bg-blue{
+      @include color($blue,$blue-active,$blue-disable);
+    }
+    &.bg-bluegreen{
+      @include color($bluegreen,$bluegreen-active,$bluegreen-disable);
+    }
+    &.bg-red{
+      @include color($red,$red-active,$red-disable);
+    }
+    @include btn-width(2);
+    display: inline-block;
+    color:$white;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 13px;
+    font-size: 17px;
+    text-align: center;
+}
+
+
+@for $i from 1 through 3 {
+  /*1行排#{$i}个*/
+  .btn-w#{$i} {
+    @include btn-width($i);
+  }
+}
+
+
+/*页面布局-----------------------------------------*/
+.spa{
+    padding:0 13px;
+    height:100%;
+    width: 100%;
+    box-sizing: border-box;
+    background-color:$gray7;
+}
+
+/*图标-----------------------------------------*/
+.icon{
+    display: inline-block;
+    background-size:100% 100%;
+    background-position: center center;
+    background-repeat: no-repeat;
+    &.message{
+        @include icon-bg('home','message.png');
+        &.new{
+            @include icon-bg('home','message-new.png');
+        }
+    }
+    &.scan{
+        @include icon-bg('home','scan.png');
+    }
+
+    &.homework{
+        @include icon-bg('home','homework.png');
+    }
+    &.iclass{
+        @include icon-bg('home','iclass.png');
+    }
+    &.iclass-record{
+        @include icon-bg('home','iclass-record.png');
+    }
+    &.wrong{
+        @include icon-bg('home','wrong.png');
+    }
+    &.ask{
+        @include icon-bg('home','ask.png');
+    }
+}

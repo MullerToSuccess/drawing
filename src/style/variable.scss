@@ -1,0 +1,57 @@
+
+/*底部区域*/
+$bottom-height: 62px;
+$bottom-btn-font-size: 18px;
+$bottom-btn-radius: 14px;
+$border-state: 1px solid #ededf0;
+
+/*头部区域*/
+$header-height: 44px;
+
+$header-title-height: 38px;
+
+/*颜色*/
+$green-primary-color: #08b783;
+$green-active-color: #13d098;
+
+$orange-active-color: #ffa94d;
+$orange-primary-color: #ff8d13;
+/**/
+
+/*头部区域*/
+$header-title: calc(38px/2);
+$header-title-s: calc(34px/2);
+$header-list: calc(30px/2);
+$header-list-s: calc(28px/2);
+/*颜色*/
+$green-primary-color: #25d6e3;
+$green-active-color: #40f0fd;
+$reset-primary-color: #23cf94;
+$reset-active-color: #32ebac;
+$delete-primary-color: #f44f2e;
+$delete-active-color: #f44f2e;
+$orange-active-color: #ffa94d;
+$orange-primary-color: #ff8d13;
+
+$color-background : #f5f5f7;
+$color-background-y : #fee101;
+$color-line : #e9ecf4;
+$color-background-d : rgba(0, 0, 0, 0.3);
+$color-highlight-background : #999;
+$color-dialog-background : #666;
+$color-theme : #ffcd32;
+$color-theme-d : rgba(255, 205, 49, 0.5);
+$color-sub-theme : #d93f30;
+$color-text : #383838;
+$color-text-d : #888888;
+
+$color-text-l : rgba(0, 0, 0, 1);
+$color-text-ll : rgba(255, 255, 255, 0.8);
+
+//字体定义规范
+$font-size-small-s : calc(10px/2);
+$font-size-small : calc(12px/2);
+$font-size-medium : calc(14px/2);
+$font-size-medium-x : calc(16px/2);
+$font-size-large : calc(18px/2);
+$font-size-large-x : calc(22px/2);

@@ -1,0 +1,28 @@
+//颜色
+@mixin color($bg,$bg-active,$bg-disable){
+    background-color:$bg;
+    &:active,&.active {
+        background-color: $bg-active;
+    }
+    &.disable { 
+        background-color:  $bg-disable;
+    }
+}
+
+//按数量设置按钮尺寸
+  @mixin btn-width($num) {
+    @if $num == 1{ 
+        width:180px;
+    }
+    @else if $num == 2{
+        width:150px;
+    }
+    @else if $num == 3{
+        width:100px;
+    }
+  }
+
+//背景图
+@mixin icon-bg($path,$name){
+    background-image: url('~@/assets/images/#{$path}/#{$name}');
+}
