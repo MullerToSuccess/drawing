@@ -14,14 +14,20 @@
     <van-icon name="search" slot="right"  @click="select"/>
     </van-nav-bar>
     <div class="popDiv">
-      <div class="sortTip" @click="popSort">排序: {{ this.currentSortType }} <van-icon name="success" /></div>
-      <div class="dateTip" @click="popDate">筛选：{{ this.filterTime }} <van-icon name="success" /></div>
+      <div class="sortTip" @click="popSort">排序: {{ this.chooseSort }} <van-icon name="success" /></div>
+      <div class="dateTip" @click="popDate">筛选：{{ this.chooseFilter }} <van-icon name="success" /></div>
       <div class="popParent">
         <div class="popContent" :class="{popContentShow: this.popContentShow}">
-          <div>按首字母排序</div>
-          <div>按总分排序</div>
-          <div>按表扬分数排序</div>
-          <div>按警告分数排序</div>
+          <div @click="sortByType('az')" :class="{ colorRed: chooseSort === 'az' }">按首字母排序</div>
+          <div @click="sortByType('total')" :class="{ colorRed: chooseSort === 'total' }">按总分排序</div>
+          <div @click="sortByType('good')" :class="{ colorRed: chooseSort === 'good' }">按表扬分数排序</div>
+          <div @click="sortByType('bad')" :class="{ colorRed: chooseSort === 'bad' }">按警告分数排序</div>
+        </div>
+        <div class="popContent2" :class="{popContentShow2: this.popContentShow2}">
+          <div @click="filterByType('default')" :class="{ colorRed: chooseFilter === 'default' }">默认：上次重置至今</div>
+          <div @click="filterByType('today')" :class="{ colorRed: chooseFilter === 'today' }">今日</div>
+          <div @click="filterByType('week')" :class="{ colorRed: chooseFilter === 'week' }">本周</div>
+          <div @click="filterByType('month')" :class="{ colorRed: chooseFilter === 'month' }">本月</div>
         </div>
       </div>
     </div>
@@ -63,15 +69,16 @@ export default {
   data() {
     return {
       popContentShow: false,
+      popContentShow2: false,
+      chooseSort: "az",
+      chooseFilter: 'default',
       checkedNames: [],
-      sortType:[{name: '1', id: 1},{name: '2', id: 2}],
+      sortType: [{ name: "1", id: 1 }, { name: "2", id: 2 }],
       toggleLeftName: "",
       commentMore: false,
       isHidden: true,
       studentImg: "@/assets/images/account/delete.png",
       popShow: false,
-      filterTime:'本堂课',
-      currentSortType:1,
       studentList: [
         {
           id: 1,
@@ -164,10 +171,10 @@ export default {
   },
   methods: {
     goback() {
-      if(!this.isHidden){
+      if (!this.isHidden) {
         this.toggleLeftName = "";
-        this.isHidden = !this.isHidden
-      }else{
+        this.isHidden = !this.isHidden;
+      } else {
         this.$router.go(-1);
       }
     },
@@ -201,12 +208,24 @@ export default {
       console.log("check this student");
       this.popShow = true;
     },
-    popSort(){
-      console.log(this.popContentShow)
-      this.popContentShow = !this.popContentShow;//切换
+    popSort() {
+      console.log(this.popContentShow2);
+      if(this.popContentShow2) this.popContentShow2 = false;
+      this.popContentShow = !this.popContentShow; //切换
     },
-    popDate(){
-
+    popDate() {
+      console.log(this.popContentShow);
+      if(this.popContentShow) this.popContentShow = false;
+      this.popContentShow2 = !this.popContentShow2; //切换
+    },
+    sortByType(type) {
+      this.popContentShow = !this.popContentShow;
+      this.chooseSort = type;
+      //区分不同的type进行排序：
+    },
+    filterByType(type){
+       this.popContentShow2 = !this.popContentShow2;
+      this.chooseFilter = type;
     }
   },
   components: {
@@ -215,32 +234,40 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
-.popParent{
+.popParent {
   // height:100px;
   width: 100%;
-  position: absolute
+  position: absolute;
 }
-.popContent{
-  display:none;
-  padding:calc(10px);
+.popContent, .popContent2 {
+  cursor: pointer;
+  display: none;
+  padding: calc(10px);
   text-align: center;
-  width:100%;
+  width: 100%;
   background: #ffffff;
-  position:absolute;
-  left:0px;
-  top:0px;
-  z-index:10000
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  z-index: 10000;
+  // div:hover{
+  //   color: red
+  // }
 }
-.sortTip, .dateTip{
+.colorRed {
+  color: red;
+}
+.sortTip,
+.dateTip {
   width: calc(49%);
   display: inline-block;
   text-align: center;
-  .van-icon{
-    color: red
+  .van-icon {
+    color: red;
   }
 }
-.popContentShow{
-  display: block
+.popContentShow, .popContentShow2 {
+  display: block;
 }
 .checkMore {
   width: 100%;
