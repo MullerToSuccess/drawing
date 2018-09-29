@@ -1,66 +1,78 @@
-import Vue from 'vue'
-import Router from 'vue-router'
-// import draw from '@/components/draw/draw'
-import login from '@/components/login/login'
-import wechat from '@/components/wechat/wechat'
-import author from '@/components/author/author'
-import userInfo from '@/components/userInfo/userInfo'
-import setUserInfo from '@/components/userInfo/setUserInfo'
-import setUserBinding from '@/components/userInfo/setUserBinding'
-import studentList from '@/components/student/studentList'
-import comStudents from '@/components/comment/comStudents'
-import count from '@/components/count/count'
-import my from '@/components/my/my'
+import Vue from "vue";
+import Router from "vue-router";
+import home from "@/components/home";
+import login from "@/components/login/login";
+import author from "@/components/author/author";
+import userInfo from "@/components/userInfo/userInfo";
+import setUserInfo from "@/components/userInfo/setUserInfo";
+import setUserBinding from "@/components/userInfo/setUserBinding";
+import studentList from "@/components/student/studentList";
+import comStudents from "@/components/comment/comStudents";
+import count from "@/components/count/count";
+import my from "@/components/my/my";
+import feedback from "@/components/my/feedback";
 
-
-Vue.use(Router)
-
+Vue.use(Router);
 
 const router = new Router({
   routes: [
     {
-      path: '/login',
-      name: 'login',
+      path: "/",
+      name: "home",
+      component: home
+    },
+    {
+      path: "/login",
+      name: "login",
       component: login
-    }, {
-      path: '/wechat',
-      name: 'wechat',
-      component: wechat
-    }, {
-      path: '/author',
-      name: 'author',
+    },
+    {
+      path: "/author",
+      name: "author",
       component: author
-    }, {
-      path: '/userInfo',
-      name: 'userInfo',
+    },
+    {
+      path: "/userInfo",
+      name: "userInfo",
       component: userInfo
-    }, {
-      path: '/userInfo/setInfo',
-      name: 'setUserInfo',
+    },
+    {
+      path: "/userInfo/setInfo",
+      name: "setUserInfo",
       component: setUserInfo
-    }, {
-      path: '/userInfo/setBinding',
-      name: 'setUserBinding',
+    },
+    {
+      path: "/userInfo/setBinding",
+      name: "setUserBinding",
       component: setUserBinding
-    }, {
-      path: '/studentList',
-      name: 'studentList',
+    },
+    {
+      path: "/studentList",
+      name: "studentList",
       component: studentList
-    }, {
-      path: '/comStudents',
-      name: 'comStudents',
+    },
+    {
+      path: "/comStudents",
+      name: "comStudents",
       component: comStudents
-    }, {
-      path: '/count',
-      name: 'count',
+    },
+    {
+      path: "/count",
+      name: "count",
       component: count
-    }, {
-      path: '/my',
-      name: 'my',
+    },
+    {
+      path: "/my",
+      name: "my",
       component: my
+    },
+    {
+      path: "/my/feedback",
+      name: "feedback",
+      component: feedback
     }
   ]
-})
+});
 // router.beforeEach((to, from, next) => {
 //   //  第一次进入项目
 //   // this.url = 'https://open.weixin.qq.com/connect/qrconnect?appid=wxc83321efa603dddc&redirect_uri=&response_type=code&scope=snsapi_login#wechat_redirect';

@@ -25,25 +25,25 @@
 </template>
 <script>
 export default {
-    data(){
-        return{
-            
-        }
-    },
-    methods:{
-        goback(){
-            this.$router.go(-1)
-        }
+  data() {
+    return {};
+  },
+  methods: {
+    goback() {
+      this.$router.push({
+        name: "studentList"
+      });
     }
-}
+  }
+};
 </script>
 <style scoped>
-.van-nav-bar{
-    background: rgba(50, 207, 162, 1);
-    color: #ffffff;
+.van-nav-bar {
+  background: rgba(50, 207, 162, 1);
+  color: #ffffff;
 }
-.van-icon{
-    color: #ffffff;
+.van-icon {
+  color: #ffffff;
 }
 </style>
 

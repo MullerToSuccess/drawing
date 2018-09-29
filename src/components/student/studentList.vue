@@ -1,8 +1,6 @@
 <template>
 <div>
-    <van-nav-bar
-    title="班级优学"
-    />
+  <mt-header  title="班级优学"></mt-header>
 <van-collapse v-model="activeNames">
   <van-collapse-item title="小学-2018级" name="1">
     <!-- <van-panel title="标题" desc="描述信息" status="状态">
@@ -40,45 +38,25 @@
   </van-collapse-item>
   <van-collapse-item title="小学-2017级" name="2">
   </van-collapse-item>
-  <ul class="tabs">
-      <li class="tab" v-for="(item, index) in tabs" :key="index" @click="toggleTab(item.path, index)">
-        <div class="t-img">
-          <img ref="imgRef" v-if="index === 1" alt="">
-          <img ref="imgRef" v-else-if  alt="">
-        </div>
-        <div class="t-text" :class="{'t-text-select':selectIndex===index}">{{item.name}}</div>
-      </li>
-    </ul>
 </van-collapse>
+ <mt-tabbar v-model="selected" fixed>
+  <mt-tab-item v-for="(item, index) in tabs" :key="index" @click="toggleTab(item.path, index)" :id="index">
+    <img slot="icon" :src="selectIndex===index?item.imgSelect:item.imgNormal">
+    <span :class="{'t-text-select':selectIndex===index}">{{ item.name }}</span>
+  </mt-tab-item>
+</mt-tabbar>
 </div>
 </template>
 
 <script>
-import scroll from '../common/components/scroll'
+import { Tabs } from "../_common/js/const";
+import scroll from "../common/components/scroll";
 export default {
   data() {
     return {
       selectIndex: 0,
-      tabs: [
-        {
-          path: "comStudents",
-          imgSelect: "",
-          imgNormal: "",
-          name: "点评"
-        },
-        {
-          path: "count",
-          imgSelect: "",
-          imgNormal: "",
-          name: "统计"
-        },
-        {
-          path: "my",
-          imgSelect: "",
-          imgNormal: "",
-          name: "我的"
-        }
-      ],
+      selected: 0,
+      tabs: Tabs,
       activeNames: ["1"],
       classInfo: [
         {
@@ -117,9 +95,30 @@ export default {
           },
           teacherName: "乔尚"
         }
-      ],
-      
+      ]
     };
+  },
+  watch: {
+    selected: function(id) {
+      this.selectIndex = id;
+      switch (id) {
+        case 0:
+          this.$router.push({
+            name: 'studentList'
+          });
+          break;
+        case 1:
+          this.$router.push({
+            name: 'count'
+          });
+          break;
+        case 2:
+          this.$router.push({
+            name: 'my'
+          });
+          break;
+      }
+    }
   },
   computed: {},
   created() {},
@@ -134,8 +133,7 @@ export default {
       this.$router.push({
         name: "comStudents"
       });
-    }, 
-    
+    }
   },
   mounted: function() {},
   components: {
@@ -145,9 +143,12 @@ export default {
 </script>
 <style  lang="scss" scoped>
 @import "./variable.scss";
-.van-nav-bar{
-    background: rgba(50, 207, 162, 1);
-    color: #ffffff;
+.mint-header{
+  background: rgba(50, 207, 162, 1);
+}
+.van-nav-bar {
+  background: rgba(50, 207, 162, 1);
+  color: #ffffff;
 }
 .panel-img {
   width: calc(90px / 2);
@@ -239,7 +240,7 @@ export default {
     }
   }
 }
-.tab-text>div{
+.tab-text > div {
   width: 40%;
   display: inline-block;
 }

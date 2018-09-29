@@ -1,18 +1,31 @@
 <template>
 <div class='studentPanel'>
-    <van-nav-bar
+    <!-- <van-nav-bar
     title="学生列表"
     :left-text="toggleLeftName"
     :left-arrow = isHidden
     @click-left="goback"
     >
-    <van-tabs type="card" slot="title">
-        <van-tab title="学生"></van-tab>
-        <van-tab title="小组"></van-tab>
+    <van-tabs type="card" slot="title" @change="toggleTab">
+        <van-tab title="学生" ></van-tab>
+        <van-tab title="小组" ></van-tab>
     </van-tabs>
     <div slot="left"><van-icon v-if="isHidden" name="arrow-left" />{{ this.toggleLeftName }}</div>
     <van-icon name="search" slot="right"  @click="select"/>
-    </van-nav-bar>
+    </van-nav-bar> -->
+
+    <mt-header>
+      <mt-button icon="back" slot="left" @click="goback">{{ toggleLeftName }}</mt-button>
+      <mt-button icon="more" slot="right" @click="select"></mt-button>
+      <!-- <mt-tab-container v-model="active">
+      <mt-tab-container-item id="tab-container1" slot="">
+        </mt-tab-container-item>
+      </mt-tab-container> -->
+    </mt-header>
+    <div class="toggle-button-wrapper">
+      <mt-button type="primary" size="small" :class="{active: toggleIndex === 0}" @click="toggle(0)">学生</mt-button>
+      <mt-button type="primary" size="small" :class="{active: toggleIndex === 1}" @click="toggle(1)">小组</mt-button>
+    </div>
     <div class="popDiv">
       <div class="sortTip" @click="popSort">排序: {{ this.chooseSort }} <van-icon name="success" /></div>
       <div class="dateTip" @click="popDate">筛选：{{ this.chooseFilter }} <van-icon name="success" /></div>
@@ -31,47 +44,62 @@
         </div>
       </div>
     </div>
-    
-    <!-- <select id="sendSybol" v-model="sortType">
-      <option  v-for="type  in sortType"  :value="type.id" >{{type.name}}</option>
-    </select> -->
-
-    <div class="studentItem" v-for="(item, index) in studentList" :key="index">
-      <!-- <img :src='studentImg'><br> -->
-      <div v-bind:class="{checkItem:true, isHidden:isHidden}"><input v-model="checkedNames" :value='item' type="checkbox" /></div>
-      <div @click="checkThis()">
-        <img src='./logo.png' style="width:40px;height:40px">   
-      <br>     
-    <van-tag mark type="primary">{{ item.weekScore.get}}</van-tag>
-      <van-tag mark type="danger">{{ item.weekScore.lose}}</van-tag>
-        <br>
-        <span>{{ item.studentName }}</span>
+    <div class="student-list-wrapper" v-if="tabName === '学生'">
+      <div class="studentItem" v-for="(item, index) in studentList">
+        <div v-bind:class="{checkItem:true, isHidden:isHidden}"><input v-model="checkedNames" :value='item' type="checkbox" /></div>
+        <div @click="checkThis()">
+          <img src='./logo.png' style="width:40px;height:40px">   
+        <br>     
+        <mt-badge type="primary">{{ item.weekScore.get}}</mt-badge>
+        <mt-badge type="error">{{ item.weekScore.lose}}</mt-badge>
+          <br>
+          <span>{{ item.studentName }}</span>
+        </div>
       </div>
-      
     </div>
+    <div class="group-list-wrapper" v-else>
+      <div class="groupItem" v-for="(item, index) in groupList">
+        <div @click="checkThis()">
+          <img src='./logo.png' style="width:40px;height:40px">   
+        <br>     
+      <mt-badge type="primary">{{ item.weekScore.get}}</mt-badge>
+        <mt-badge type="error">{{ item.weekScore.lose}}</mt-badge>
+          <br>
+          <span>{{ item.groupName }}</span>
+        </div>
+      </div>
+    </div>
+  <!-- <tAlphabet :cities="cities"></tAlphabet> -->
     <div class="checkMore" :class="{isHidden: !isHidden}"><van-button size="large" @click="checkMore">多选</van-button></div>
-    <div class="checkMore" :class="{isHidden: isHidden}"><van-button size="large" @click="dianping">点评( {{ this.checkedNames.length }} )</van-button></div>
+    <div class="checkMore" :class="{isHidden: isHidden}">
+      <van-button size="large" @click="dianping">点评( {{ this.checkedNames.length }} )</van-button>
+      </div>
     <comPop :isShow ='isPopShow' :checkedName="checkedNames"
     @cancelPop='hidePop'></comPop>
-    <van-actionsheet
-    v-model="show"
-    :actions="actions"
-    @select="onSelect"
-    cancel-text="取消"
-    @cancel="onCancel"
-    />
-</div>
+
+    <mt-actionsheet
+      :actions="actions"
+      v-model="show">
+    </mt-actionsheet>
+    </div>
 </template>
 <script>
-import { Card } from "vant";
+import Bscroll from "better-scroll";
+import eventBus from "@/model/eventBus";
+import { Card, Toast } from "vant";
 import comPop from "./comPop.vue";
+import tAlphabet from "./tAlphabet.vue";
 export default {
   data() {
     return {
+      toggleIndex: 0,
+      tabName: "学生",
+      hasGroup: false,
+      letter: "",
       popContentShow: false,
       popContentShow2: false,
       chooseSort: "az",
-      chooseFilter: 'default',
+      chooseFilter: "default",
       checkedNames: [],
       sortType: [{ name: "1", id: 1 }, { name: "2", id: 2 }],
       toggleLeftName: "",
@@ -153,6 +181,16 @@ export default {
           }
         }
       ],
+      groupList: [
+        {
+          id: 1,
+          groupName: "ddd",
+          weekScore: {
+            get: 1,
+            lose: 1
+          }
+        }
+      ],
       show: false,
       actions: [
         {
@@ -164,12 +202,43 @@ export default {
       ]
     };
   },
+  watch: {
+    letter() {
+      if (this.letter) {
+        debugger;
+        const element = this.$refs[this.letter][0];
+        this.scroll.scrollToElement(element, 300);
+      }
+    }
+  },
   computed: {
     isPopShow: function() {
       return this.popShow;
     }
   },
+  mounted() {
+    eventBus.$on("change", letter => {
+      debugger;
+      this.letter = letter;
+    });
+    this.$nextTick(() => {
+      this.scroll = new Bscroll(this.$refs.wrapper, {
+        click: true
+      });
+    });
+  },
   methods: {
+    toggle(index) {
+      this.toggleIndex = index;
+      index === 0 ? (this.tabName = "学生") : (this.tabName = "小组");
+      if (!this.hasGroup && this.tabName === '小组') {
+        Toast({
+          message: "班级还未分组，请先到班级管理中进行分组操作",
+          position: "center",
+          duration: 2000
+        });
+      }
+    },
     goback() {
       if (!this.isHidden) {
         this.toggleLeftName = "";
@@ -202,7 +271,11 @@ export default {
       this.isHidden = !this.isHidden;
     },
     dianping() {
-      this.popShow = true;
+      if (this.checkedNames.length > 0) {
+        this.popShow = true;
+      } else {
+        Toast.fail("请先勾选要点评的学生");
+      }
     },
     checkThis() {
       console.log("check this student");
@@ -210,12 +283,12 @@ export default {
     },
     popSort() {
       console.log(this.popContentShow2);
-      if(this.popContentShow2) this.popContentShow2 = false;
+      if (this.popContentShow2) this.popContentShow2 = false;
       this.popContentShow = !this.popContentShow; //切换
     },
     popDate() {
       console.log(this.popContentShow);
-      if(this.popContentShow) this.popContentShow = false;
+      if (this.popContentShow) this.popContentShow = false;
       this.popContentShow2 = !this.popContentShow2; //切换
     },
     sortByType(type) {
@@ -223,23 +296,63 @@ export default {
       this.chooseSort = type;
       //区分不同的type进行排序：
     },
-    filterByType(type){
-       this.popContentShow2 = !this.popContentShow2;
+    filterByType(type) {
+      this.popContentShow2 = !this.popContentShow2;
       this.chooseFilter = type;
+    },
+    toggleTab(index, title) {
+      // console.log(title)
+      this.tabName = title;
     }
   },
   components: {
-    comPop
+    comPop,
+    tAlphabet
   }
 };
 </script>
 <style lang='scss' scoped>
+@import "@/style/vant-edit.scss";
+.mint-header {
+  background: rgba(50, 207, 162, 1);
+}
+.popDiv {
+  height: 35px;
+  line-height: 35px;
+}
+.student-list-wrapper,
+.group-list-wrapper {
+  background: rgb(242, 242, 242);
+  height: 90vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.toggle-button-wrapper {
+  position: fixed;
+  text-align: center;
+  left: 22%;
+  font-size: 14px;
+  border: 1px solid #ffffff;
+  border-radius: 5px;
+  top: 5px;
+  button {
+    // border-radius: 0 !important;
+    width: 100px;
+    height: 30px;
+    color: #ffffff;
+    background: rgba(50, 207, 162, 1);
+  }
+  .active {
+    color: rgba(50, 207, 162, 1);
+    background: #ffffff;
+  }
+}
 .popParent {
-  // height:100px;
   width: 100%;
   position: absolute;
 }
-.popContent, .popContent2 {
+.popContent,
+.popContent2 {
   cursor: pointer;
   display: none;
   padding: calc(10px);
@@ -266,13 +379,17 @@ export default {
     color: red;
   }
 }
-.popContentShow, .popContentShow2 {
+.popContentShow,
+.popContentShow2 {
   display: block;
+  div {
+    padding: 5px;
+  }
 }
 .checkMore {
   width: 100%;
   bottom: 1px;
-  position: absolute;
+  position: fixed;
   bottom: 0;
 }
 .studentPanel {
@@ -288,13 +405,14 @@ export default {
   display: none;
   /* display: visible; */
 }
-.studentItem {
+.studentItem,
+.groupItem {
   padding: 15px 0px;
   width: 25% !important;
   display: inline-block;
   text-align: center;
   /* margin-left: calc(2px/2); */
-  background: #ffffff;
+  background: rgb(242, 242, 242);
 }
 .van-nav-bar {
   background: rgba(50, 207, 162, 1);
@@ -302,6 +420,66 @@ export default {
 }
 .van-icon {
   color: #ffffff;
+}
+.list {
+  position: bsolute;
+  overflow: hidden;
+  top: 40px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  .title {
+    line-height: 27px;
+    padding-left: 10px;
+    background: #eee;
+    .button-list {
+      padding: 5px 30px 5px 5px;
+      overflow: hidden;
+      .button-wrapper {
+        float: left;
+        width: 25%;
+        .button {
+          margin: 5px;
+          padding: 5px;
+          font-size: 12px;
+          border: 1px solid #ccc;
+          border-radius: 3px;
+          text-align: center;
+        }
+      }
+    }
+  }
+  .toast {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 10;
+    width: 50px;
+    height: 50px;
+    background: #ed4e5e;
+    border-radius: 50%;
+    text-align: center;
+    transition: all 0.5s;
+    .fade-enter {
+      opacity: 0;
+    }
+    .fade-leave,
+    .fade-enter-active {
+      opacity: 1;
+    }
+
+    .fade-leave-active {
+      opacity: 0;
+    }
+
+    .letter {
+      line-height: 50px;
+      font-size: 16px;
+      font-weight: 700;
+      color: #eee;
+    }
+  }
 }
 </style>
 

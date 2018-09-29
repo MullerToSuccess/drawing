@@ -4,6 +4,8 @@
 
 const path = require('path')
 
+let basePath = '../dist/HW';
+
 module.exports = {
   dev: {
 
@@ -51,8 +53,24 @@ module.exports = {
   },
 
   build: {
+    himUrl: '../lib/qti/',
+    qtiUrl: '../lib/qti/',
+    libUrl: '../lib/',
     // Template for index.html
-    index: path.resolve(__dirname, '../dist/index.html'),
+    // index: path.resolve(__dirname, '../dist/index.html'),
+    version: new Date().toLocaleString(),
+    // Template for index.html
+    index: process.env.arg === 'publish' ? publishPath + '/index.html' : path.resolve(__dirname, basePath + '/index.html'),
+    indexAndroid: process.env.arg === 'publish' ? publishPath + '/index-android.html' : path.resolve(__dirname, basePath + '/index-android.html'),
+    indexAndroidAutoTest: process.env.arg === 'publish' ? publishPath + '/index-android-autotest.html' : path.resolve(__dirname, basePath + '/index-android-autotest.html'),
+    indexIos: process.env.arg === 'publish' ? publishPath + '/index-ios.html' : path.resolve(__dirname, basePath + '/index-ios.html'),
+
+    // Paths
+    assetsRoot: process.env.arg === 'publish' ? publishPath : path.resolve(__dirname, basePath),
+    assetsSubDirectory: 'static',
+    assetsPublicPath: './',
+
+
 
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
