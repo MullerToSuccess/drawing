@@ -10,10 +10,10 @@
     <mt-cell title="意见反馈" icon="more" is-link to="/my/feedback">
       <img slot="icon" src="@/assets/logo.png" width="24" height="24">
     </mt-cell>
-    <mt-cell title="设置" icon="more" is-link to="/my/feedback">
+    <mt-cell title="设置" icon="more" is-link to="/my/set">
       <img slot="icon" src="@/assets/logo.png" width="24" height="24">
     </mt-cell>
-    <mt-cell title="关于我们" icon="more" is-link to="/my/feedback">
+    <mt-cell title="关于我们" icon="more" is-link to="/my/about">
       <img slot="icon" src="@/assets/logo.png" width="24" height="24">
     </mt-cell>
   </div>

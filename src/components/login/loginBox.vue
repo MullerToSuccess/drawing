@@ -92,7 +92,7 @@ export default {
     height: 45px;
     color: #ffffff;
     margin: 52.5px auto 0;
-    background: rgba(22, 155, 213, 1);
+    background: rgba(50, 207, 162, 1);
     letter-spacing: 4px;
     text-align: center;
     line-height: 45px;

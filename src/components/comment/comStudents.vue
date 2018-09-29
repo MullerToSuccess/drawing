@@ -48,7 +48,7 @@
       <div class="studentItem" v-for="(item, index) in studentList">
         <div v-bind:class="{checkItem:true, isHidden:isHidden}"><input v-model="checkedNames" :value='item' type="checkbox" /></div>
         <div @click="checkThis()">
-          <img src='./logo.png' style="width:40px;height:40px">   
+          <img src='@/assets/_images/public/audio.jpg' style="width:40px;height:40px">   
         <br>     
         <mt-badge type="primary">{{ item.weekScore.get}}</mt-badge>
         <mt-badge type="error">{{ item.weekScore.lose}}</mt-badge>
@@ -60,7 +60,7 @@
     <div class="group-list-wrapper" v-else>
       <div class="groupItem" v-for="(item, index) in groupList">
         <div @click="checkThis()">
-          <img src='./logo.png' style="width:40px;height:40px">   
+          <img src='@/assets/_images/public/audio.jpg' style="width:40px;height:40px">   
         <br>     
       <mt-badge type="primary">{{ item.weekScore.get}}</mt-badge>
         <mt-badge type="error">{{ item.weekScore.lose}}</mt-badge>
@@ -314,6 +314,7 @@ export default {
 <style lang='scss' scoped>
 @import "@/style/vant-edit.scss";
 .mint-header {
+  height: 46px;
   background: rgba(50, 207, 162, 1);
 }
 .popDiv {

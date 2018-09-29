@@ -1,6 +1,6 @@
 <template>
 <div>
-    <van-nav-bar
+    <!-- <van-nav-bar
     title="点评统计"
     left-text="返回"
     left-arrow
@@ -9,31 +9,22 @@
     <van-icon name="arrow-left" slot="left" />
     <van-icon name="search" slot="right" />
     </van-nav-bar>
-    <van-card
-  title="标题"
-  desc="描述"  
-  num="2"
-  price="2.00"
-  :thumb="imageURL"
->
-  <div slot="footer">
-    <van-button size="mini">按钮</van-button>
-    <van-button size="mini">按钮</van-button>
-  </div>
-</van-card>
+     -->
+     <header-bar>
+        <div slot="title-name">点评统计</div>
+      </header-bar>
 </div>
 </template>
 <script>
+import HeaderBar from '../_common/components/headerBar'
 export default {
   data() {
     return {};
   },
   methods: {
-    goback() {
-      this.$router.push({
-        name: "studentList"
-      });
-    }
+  },
+  components: {
+    HeaderBar
   }
 };
 </script>

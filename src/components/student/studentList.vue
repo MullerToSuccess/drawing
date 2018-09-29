@@ -1,6 +1,6 @@
 <template>
 <div>
-  <mt-header  title="班级优学"></mt-header>
+  <div class="title-name">班级优学</div>
 <van-collapse v-model="activeNames">
   <van-collapse-item title="小学-2018级" name="1">
     <!-- <van-panel title="标题" desc="描述信息" status="状态">
@@ -51,6 +51,7 @@
 <script>
 import { Tabs } from "../_common/js/const";
 import scroll from "../common/components/scroll";
+import HeaderBar from "../_common/components/headerBar";
 export default {
   data() {
     return {
@@ -104,17 +105,17 @@ export default {
       switch (id) {
         case 0:
           this.$router.push({
-            name: 'studentList'
+            name: "studentList"
           });
           break;
         case 1:
           this.$router.push({
-            name: 'count'
+            name: "count"
           });
           break;
         case 2:
           this.$router.push({
-            name: 'my'
+            name: "my"
           });
           break;
       }
@@ -137,14 +138,31 @@ export default {
   },
   mounted: function() {},
   components: {
-    scroll
+    scroll,
+    HeaderBar
   }
 };
 </script>
 <style  lang="scss" scoped>
-@import "./variable.scss";
-.mint-header{
+@import "@/style/variable.scss";
+.title-name{
+    position: fixed;
+    top: 0;
+    z-index: 50;
+    width: 100%;
+    height: calc(100px/2);
+    line-height: calc(100px/2);
+    text-align: center;
+    font-size: $header-title;
+    color: $header-text-color;
+    background-color: $header-background-color;
+  }
+.mint-header {
+  height: 46px;
   background: rgba(50, 207, 162, 1);
+  .mint-header-title {
+    font-size: 4vw;
+  }
 }
 .van-nav-bar {
   background: rgba(50, 207, 162, 1);

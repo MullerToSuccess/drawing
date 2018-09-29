@@ -47,12 +47,12 @@ export default {
     display: flex;
     justify-content: space-between;
     box-sizing: border-box;
-    background-color: $color-background-y;
+    background-color: $header-background-color;
     .back-btn{
       display: inline-block;
       font-size: calc(38px/2);
       width: calc(90px/2); //如果修改此值，则.right-area的width也要同步修改一样的值，不然会造成title-name不居中
-      color: $color-text;
+      color: $header-text-color;
       .icon-back{
         display: inline-block;
         width: calc(36px/2);
@@ -69,6 +69,7 @@ export default {
     .title-name{
       font-size: $header-title;
       max-width: 60%;
+      color: $header-text-color;
       // align-items: center;
       div {
         overflow: hidden;

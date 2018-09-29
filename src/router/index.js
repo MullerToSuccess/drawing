@@ -11,6 +11,8 @@ import comStudents from "@/components/comment/comStudents";
 import count from "@/components/count/count";
 import my from "@/components/my/my";
 import feedback from "@/components/my/feedback";
+import set from "@/components/my/set";
+import about from "@/components/my/about";
 
 Vue.use(Router);
 
@@ -19,7 +21,8 @@ const router = new Router({
     {
       path: "/",
       name: "home",
-      component: home
+      component: home,
+      meta: {requiresAuth: true, keepAlive: true},
     },
     {
       path: "/login",
@@ -70,32 +73,44 @@ const router = new Router({
       path: "/my/feedback",
       name: "feedback",
       component: feedback
+    },
+    {
+      path: "/my/set",
+      name: "set",
+      component: set
+    },
+    {
+      path: "/my/about",
+      name: "about",
+      component: about
     }
   ]
 });
-// router.beforeEach((to, from, next) => {
-//   //  第一次进入项目
-//   // this.url = 'https://open.weixin.qq.com/connect/qrconnect?appid=wxc83321efa603dddc&redirect_uri=&response_type=code&scope=snsapi_login#wechat_redirect';
-//   console.log(1111111);
-//   let token = window.localStorage.getItem("user_token");
+router.beforeEach((to, from, next) => {
+  console.log('to', to)
+  console.log('from', from)
+  //  第一次进入项目
+  // this.url = 'https://open.weixin.qq.com/connect/qrconnect?appid=wxc83321efa603dddc&redirect_uri=&response_type=code&scope=snsapi_login#wechat_redirect';
+  // console.log(1111111);
+  // let token = window.localStorage.getItem("user_token");
 
-//   if (!token && to.path != "/author") {
-//    window.localStorage.setItem("beforeLoginUrl", to.fullPath); // 保存用户进入的url
-//    next("/userInfo");
-//    return false;
-//   } else if (token && !store.getters.userInfo) {
-//   // //获取用户信息接口
-//   //  store
-//   //   .dispatch("GetUserInfo", {
-//   //    user_token: token
-//   //   })
-//   //   .catch(err => {
-//   //    window.localStorage.removeItem("user_token");
-//   //    router.go(0);
-//   //    return false;
-//   //   });
-//   }
-//   next();
-// })
+  // if (!token && to.path != "/author") {
+  //  window.localStorage.setItem("beforeLoginUrl", to.fullPath); // 保存用户进入的url
+  //  next("/userInfo");
+  //  return false;
+  // } else if (token && !store.getters.userInfo) {
+  // // //获取用户信息接口
+  // //  store
+  // //   .dispatch("GetUserInfo", {
+  // //    user_token: token
+  // //   })
+  // //   .catch(err => {
+  // //    window.localStorage.removeItem("user_token");
+  // //    router.go(0);
+  // //    return false;
+  // //   });
+  // }
+  next();
+})
 
 export default router;
