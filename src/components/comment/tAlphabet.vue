@@ -41,6 +41,7 @@ export default {
     handleLetterClick(e) {
       debugger
       console.log(111)
+      console.log(this.$refs);
       eventBus.$emit('change',e.target.innerText)
     },
     handleTouchStart() {
@@ -57,6 +58,7 @@ export default {
           const touchY = e.touches[0].clientY - 40
           const index = Math.floor((touchY - this.startY)/20)
           if(index >= 0 && index < this.letters.length) {
+            console.log(this.letters[index])
             eventBus.$emit('change', this.letters[index])
           }
         }, 16);
@@ -74,10 +76,10 @@ export default {
   justify-content:center;
   align-items:center;
   position:absolute;
-  top:20px;
+  top:81px;
   width:20px;
   right:0;
-  bottom:0;
+  bottom:40px;
   background:#ffffff; 
   .item{
     text-align:center;

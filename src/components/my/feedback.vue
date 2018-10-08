@@ -23,7 +23,7 @@
             <div class="check-image-container">
                 <div class="check-image" @click="clickPhoto(item, 'before')">
                     <div class="check-image-div">
-                        <img class="check-image-div-img" src="@/assets/_images/teacher/take-photo.png">
+                        <img class="check-image-div-img" src="@/assets/_images/my/take-photo.png">
                     </div>
                     <div><span>点击上传</span></div>
                 </div>

@@ -1,64 +1,39 @@
 <template>
 <div class='studentPanel'>
-    <!-- <van-nav-bar
-    title="学生列表"
-    :left-text="toggleLeftName"
-    :left-arrow = isHidden
-    @click-left="goback"
-    >
-    <van-tabs type="card" slot="title" @change="toggleTab">
-        <van-tab title="学生" ></van-tab>
-        <van-tab title="小组" ></van-tab>
-    </van-tabs>
-    <div slot="left"><van-icon v-if="isHidden" name="arrow-left" />{{ this.toggleLeftName }}</div>
-    <van-icon name="search" slot="right"  @click="select"/>
-    </van-nav-bar> -->
-
     <mt-header>
       <mt-button icon="back" slot="left" @click="goback">{{ toggleLeftName }}</mt-button>
       <mt-button icon="more" slot="right" @click="select"></mt-button>
-      <!-- <mt-tab-container v-model="active">
-      <mt-tab-container-item id="tab-container1" slot="">
-        </mt-tab-container-item>
-      </mt-tab-container> -->
     </mt-header>
     <div class="toggle-button-wrapper">
       <mt-button type="primary" size="small" :class="{active: toggleIndex === 0}" @click="toggle(0)">学生</mt-button>
       <mt-button type="primary" size="small" :class="{active: toggleIndex === 1}" @click="toggle(1)">小组</mt-button>
     </div>
-    <div class="popDiv">
-      <div class="sortTip" @click="popSort">排序: {{ this.chooseSort }} <van-icon name="success" /></div>
-      <div class="dateTip" @click="popDate">筛选：{{ this.chooseFilter }} <van-icon name="success" /></div>
-      <div class="popParent">
-        <div class="popContent" :class="{popContentShow: this.popContentShow}">
-          <div @click="sortByType('az')" :class="{ colorRed: chooseSort === 'az' }">按首字母排序</div>
-          <div @click="sortByType('total')" :class="{ colorRed: chooseSort === 'total' }">按总分排序</div>
-          <div @click="sortByType('good')" :class="{ colorRed: chooseSort === 'good' }">按表扬分数排序</div>
-          <div @click="sortByType('bad')" :class="{ colorRed: chooseSort === 'bad' }">按警告分数排序</div>
-        </div>
-        <div class="popContent2" :class="{popContentShow2: this.popContentShow2}">
-          <div @click="filterByType('default')" :class="{ colorRed: chooseFilter === 'default' }">默认：上次重置至今</div>
-          <div @click="filterByType('today')" :class="{ colorRed: chooseFilter === 'today' }">今日</div>
-          <div @click="filterByType('week')" :class="{ colorRed: chooseFilter === 'week' }">本周</div>
-          <div @click="filterByType('month')" :class="{ colorRed: chooseFilter === 'month' }">本月</div>
-        </div>
-      </div>
-    </div>
-    <div class="student-list-wrapper" v-if="tabName === '学生'">
-      <div class="studentItem" v-for="(item, index) in studentList">
-        <div v-bind:class="{checkItem:true, isHidden:isHidden}"><input v-model="checkedNames" :value='item' type="checkbox" /></div>
-        <div @click="checkThis()">
-          <img src='@/assets/_images/public/audio.jpg' style="width:40px;height:40px">   
-        <br>     
-        <mt-badge type="primary">{{ item.weekScore.get}}</mt-badge>
-        <mt-badge type="error">{{ item.weekScore.lose}}</mt-badge>
-          <br>
-          <span>{{ item.studentName }}</span>
-        </div>
-      </div>
-    </div>
-    <div class="group-list-wrapper" v-else>
-      <div class="groupItem" v-for="(item, index) in groupList">
+    <popUp :filterTypes='filterTypes' :dateTypes='dateTypes' @cover='cover'></popUp>
+    <v-touch
+      v-on:swiperight="onSwipeRight"
+      v-on:swipeleft="onSwipeLeft" ref="wrapper" class="student-list-wrapper" v-if="tabName === '学生'">
+      <!-- <div ref="studentList" class="student-list-wrapper" v-if="tabName === '学生'"> -->
+        <scroll class="student-list-wrapper" ref="listStudent">
+          <div class="studentItem" v-for="(item, index) in studentList" :key="index" :ref="item.id">
+            <div v-bind:class="{checkItem:true, isHidden:isHidden}"><input v-model="checkedNames" :value='item' type="checkbox" /></div>
+            <div @click="checkThis(isMulti)">
+              <img src='@/assets/_images/public/audio.jpg' style="width:40px;height:40px">   
+            <br>     
+            <mt-badge type="primary">{{ item.weekScore.get}}</mt-badge>
+            <mt-badge type="error">{{ item.weekScore.lose}}</mt-badge>
+              <br>
+              <span>{{ item.studentName }}</span>
+            </div>
+          </div>
+        </scroll>
+    </v-touch>
+    <!-- </div> -->
+    <v-touch
+      v-on:swiperight="onSwipeRight"
+      v-on:swipeleft="onSwipeLeft"  class="group-list-wrapper" v-else>
+    <!-- <div class="group-list-wrapper" v-else> -->
+      <scroll class="group-list-wrapper" ref="listGroup">
+      <div class="groupItem" v-for="(item, index) in groupList" :key="index" :ref="item.id">
         <div @click="checkThis()">
           <img src='@/assets/_images/public/audio.jpg' style="width:40px;height:40px">   
         <br>     
@@ -68,11 +43,22 @@
           <span>{{ item.groupName }}</span>
         </div>
       </div>
+      </scroll>
+    <!-- </div> -->
+    </v-touch>
+    
+  <tAlphabet :cities="cities" ></tAlphabet>
+    <div class="checkMore" :class="{isHidden: !isHidden}">
+      
+      <div @click="checkMore">
+        <span @click="cancelComment" v-if="haveComment" class="cancel-comment">
+          撤销上一步
+        </span>
+        <span>多选</span>
+      </div>
     </div>
-  <!-- <tAlphabet :cities="cities"></tAlphabet> -->
-    <div class="checkMore" :class="{isHidden: !isHidden}"><van-button size="large" @click="checkMore">多选</van-button></div>
     <div class="checkMore" :class="{isHidden: isHidden}">
-      <van-button size="large" @click="dianping">点评( {{ this.checkedNames.length }} )</van-button>
+      <div @click="dianping">点评( {{ this.checkedNames.length }} )</div>
       </div>
     <comPop :isShow ='isPopShow' :checkedName="checkedNames"
     @cancelPop='hidePop'></comPop>
@@ -84,11 +70,14 @@
     </div>
 </template>
 <script>
-import Bscroll from "better-scroll";
+import comment from "./axios/index";
+import scroll from "../common/components/scroll";
 import eventBus from "@/model/eventBus";
+import { cities, studentList, groupList } from "../common/js/const";
 import { Card, Toast } from "vant";
 import comPop from "./comPop.vue";
 import tAlphabet from "./tAlphabet.vue";
+import popUp from "../_common/components/popUp";
 export default {
   data() {
     return {
@@ -96,6 +85,7 @@ export default {
       tabName: "学生",
       hasGroup: false,
       letter: "",
+      isMulti: false,
       popContentShow: false,
       popContentShow2: false,
       chooseSort: "az",
@@ -105,92 +95,12 @@ export default {
       toggleLeftName: "",
       commentMore: false,
       isHidden: true,
+      haveComment: true,
       studentImg: "@/assets/images/account/delete.png",
       popShow: false,
-      studentList: [
-        {
-          id: 1,
-          studentName: "ddd",
-          weekScore: {
-            get: 1,
-            lose: 1
-          }
-        },
-        {
-          id: 2,
-          studentName: "乔尚",
-          weekScore: {
-            get: 1,
-            lose: 1
-          }
-        },
-        {
-          id: 3,
-          studentName: "xxx",
-          weekScore: {
-            get: 1,
-            lose: 1
-          }
-        },
-        {
-          id: 4,
-          studentName: "乔尚",
-          weekScore: {
-            get: 1,
-            lose: 1
-          }
-        },
-        {
-          id: 5,
-          studentName: "乔尚",
-          weekScore: {
-            get: 1,
-            lose: 1
-          }
-        },
-        {
-          id: 6,
-          studentName: "乔尚",
-          weekScore: {
-            get: 1,
-            lose: 1
-          }
-        },
-        {
-          id: 7,
-          studentName: "乔尚",
-          weekScore: {
-            get: 1,
-            lose: 1
-          }
-        },
-        {
-          id: 8,
-          studentName: "乔尚",
-          weekScore: {
-            get: 1,
-            lose: 1
-          }
-        },
-        {
-          id: 9,
-          studentName: "乔尚",
-          weekScore: {
-            get: 1,
-            lose: 1
-          }
-        }
-      ],
-      groupList: [
-        {
-          id: 1,
-          groupName: "ddd",
-          weekScore: {
-            get: 1,
-            lose: 1
-          }
-        }
-      ],
+      cities: cities,
+      studentList: studentList,
+      groupList: groupList,
       show: false,
       actions: [
         {
@@ -199,15 +109,34 @@ export default {
         {
           name: "重置分数"
         }
+      ],
+      filterTypes: [
+        { name: "az", cname: "首字母" },
+        { name: "total", cname: "总分" },
+        { name: "good", cname: "表扬分数" },
+        { name: "bad", cname: "警告分数" }
+      ],
+      dateTypes: [
+        { name: "default", cname: "上次重置至今" },
+        { name: "today", cname: "今日" },
+        { name: "week", cname: "本周" },
+        { name: "month", cname: "本月" }
       ]
     };
+  },
+  created() {
+    // comment
+    //   .getStudents()
+    //   .then(r => {
+    //     console.log(r);
+    //   });
   },
   watch: {
     letter() {
       if (this.letter) {
         debugger;
-        const element = this.$refs[this.letter][0];
-        this.scroll.scrollToElement(element, 300);
+        console.log(this.$refs.listStudent)
+        this.$refs.listStudent.scrollToElement(this.$refs.listStudent, 300);
       }
     }
   },
@@ -221,17 +150,38 @@ export default {
       debugger;
       this.letter = letter;
     });
-    this.$nextTick(() => {
-      this.scroll = new Bscroll(this.$refs.wrapper, {
-        click: true
-      });
-    });
   },
   methods: {
+    onSwipeRight() {
+      if (this.toggleIndex) {
+        this.toggleIndex = 0;
+        this.tabName = "学生";
+      } else {
+        console.log("left.....");
+      }
+    },
+    onSwipeLeft() {
+      if (!this.toggleIndex) {
+        this.toggleIndex = 1;
+        this.tabName = "小组";
+      } else {
+        console.log("right.....");
+      }
+    },
+    cover(isCover) {
+      console.log(this.$refs);
+      // if (isCover) {
+      //   this.$refs["studentList"].style.filter = "gray";
+      //   this.$refs["studentList"].style.opacity = "0.2";
+      // } else {
+      //   this.$refs["studentList"].style.filter = "gray";
+      //   this.$refs["studentList"].style.opacity = "1";
+      // }
+    },
     toggle(index) {
       this.toggleIndex = index;
       index === 0 ? (this.tabName = "学生") : (this.tabName = "小组");
-      if (!this.hasGroup && this.tabName === '小组') {
+      if (!this.hasGroup && this.tabName === "小组") {
         Toast({
           message: "班级还未分组，请先到班级管理中进行分组操作",
           position: "center",
@@ -266,6 +216,7 @@ export default {
       console.log(444);
     },
     checkMore() {
+      this.isMulti = true;
       this.toggleLeftName = "取消";
       this.checkedNames = [];
       this.isHidden = !this.isHidden;
@@ -279,6 +230,9 @@ export default {
     },
     checkThis() {
       console.log("check this student");
+      if (this.isMulti) {
+        return;
+      }
       this.popShow = true;
     },
     popSort() {
@@ -303,19 +257,39 @@ export default {
     toggleTab(index, title) {
       // console.log(title)
       this.tabName = title;
-    }
+    },
+    cancelComment() {}
   },
   components: {
     comPop,
-    tAlphabet
+    tAlphabet,
+    popUp,
+    scroll
   }
 };
 </script>
 <style lang='scss' scoped>
 @import "@/style/vant-edit.scss";
+.student-list-wrapper, .group-list-wrapper{
+  overflow: hidden;
+  height: 90vh;
+  // top:36px;
+  top: 0;
+  bottom: 46px;
+  div{
+    z-index: 0
+  }
+}
+.cancel-comment {
+  position: fixed;
+  left: 0;
+}
 .mint-header {
   height: 46px;
   background: rgba(50, 207, 162, 1);
+}
+.touchWrapper {
+  background: #ed4e5e;
 }
 .popDiv {
   height: 35px;
@@ -392,6 +366,14 @@ export default {
   bottom: 1px;
   position: fixed;
   bottom: 0;
+  display: flex;
+  div {
+    width: 100%;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    background: #fff;
+  }
 }
 .studentPanel {
   width: 100%;
@@ -404,7 +386,7 @@ export default {
 }
 .isHidden {
   display: none;
-  /* display: visible; */
+  // display: visible;
 }
 .studentItem,
 .groupItem {

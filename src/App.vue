@@ -119,15 +119,10 @@ export default {
     // }),
     onSwipeRight() {
       const fade = [
-        "manager",
-        "teacher",
         "home",
-        "news",
         "my",
         "login",
-        "editMsg",
-        "selectTeacher",
-        "details"
+        "comStudents" //学生点评
       ];
       let UrlArr = this.$route.path.split("/");
       let LastRoute = UrlArr[UrlArr.length - 1];

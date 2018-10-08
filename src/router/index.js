@@ -2,6 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import home from "@/components/home";
 import login from "@/components/login/login";
+import account from '@/components/account/router/index';
 import author from "@/components/author/author";
 import userInfo from "@/components/userInfo/userInfo";
 import setUserInfo from "@/components/userInfo/setUserInfo";
@@ -22,7 +23,7 @@ const router = new Router({
       path: "/",
       name: "home",
       component: home,
-      meta: {requiresAuth: true, keepAlive: true},
+      meta: { requiresAuth: true, keepAlive: true }
     },
     {
       path: "/login",
@@ -83,12 +84,42 @@ const router = new Router({
       path: "/my/about",
       name: "about",
       component: about
-    }
+    },
+    ...account
   ]
 });
 router.beforeEach((to, from, next) => {
-  console.log('to', to)
-  console.log('from', from)
+  console.log("to", to);
+  console.log("from", from);
+  // 定义路由堆栈信息，便于转场动画
+  // const fade = ["manager", "teacher", "home", "news", "my", "login"];
+  // let toUrlArr = to.fullPath.split("/");
+  // let fromUrlArr = from.fullPath.split("/");
+  // let toLastRoute = toUrlArr[toUrlArr.length - 1];
+  // let fromLastRoute = fromUrlArr[fromUrlArr.length - 1];
+  // let routerArr = router.app.$options.store.state.account.routerStack;
+  // if (routerArr.find(val => val === to.name)) {
+  //   router.app.$options.store.state.account.transitionType = "back";
+  // } else {
+  //   router.app.$options.store.state.account.transitionType = "forward";
+  // }
+  // // 在fade数组中转场
+  // if (
+  //   fade.indexOf(toLastRoute) >= 0 &&
+  //   (fade.indexOf(fromLastRoute) >= 0 || fromLastRoute === "")
+  // ) {
+  //   router.app.$options.store.state.account.transitionType = "fade";
+  //   if (to.name === "login") {
+  //     router.app.$options.store.state.account.routerStack = ["login"];
+  //   }
+  // }
+  // if (!routerArr.find(val => val === to.name)) {
+  //   routerArr.push(to.name);
+  // } else {
+  //   if (from.name === routerArr[routerArr.length - 1]) {
+  //     routerArr.splice(-1, 1);
+  //   }
+  // }
   //  第一次进入项目
   // this.url = 'https://open.weixin.qq.com/connect/qrconnect?appid=wxc83321efa603dddc&redirect_uri=&response_type=code&scope=snsapi_login#wechat_redirect';
   // console.log(1111111);
@@ -111,6 +142,6 @@ router.beforeEach((to, from, next) => {
   // //   });
   // }
   next();
-})
+});
 
 export default router;

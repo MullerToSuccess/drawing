@@ -11,14 +11,14 @@
         <div class="logo-wrapper">
             <div class="logo-image">
                 <div class="logo">
-                    <img src="@/assets/logo.png">
+                    <img src="@/assets/_images/my/logo.png">
                 </div>
                 <div class="name">优学优评</div>
                 <div class="version">V1.0.0</div>
             </div>
         </div>
         <mt-cell title="微信公众号" icon="more" is-link to="/my/feedback" value="优学派智慧课堂">
-            <img slot="icon" src="@/assets/logo.png" width="24" height="24">
+            <img slot="icon" src="@/assets/_images/my/wechat.png" width="24" height="24">
         </mt-cell>
         <div class="copyright">
             深圳市优学天下教育发展股份有限公司C版权所有

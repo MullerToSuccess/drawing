@@ -4,7 +4,7 @@
             <div slot="title-name">设置</div>
         </header-bar>
         <mt-cell title="检查更新" icon="more" is-link to="/my/feedback">
-            <img slot="icon" src="@/assets/logo.png" width="24" height="24">
+            <img slot="icon" src="@/assets/_images/my/new.png" width="24" height="24">
         </mt-cell>
         <div class="logout" @click="logout">
             退出登录

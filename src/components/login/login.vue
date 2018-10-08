@@ -1,7 +1,8 @@
 <template>
      <div id="login" class="page" :style="background">
     <div class="icon-box">
-      <img src="./logo.png" alt="">
+      <img src="@/assets/_images/public/logo.png" alt="">
+      <div class="logo-title">优学优评</div>
     </div>
     <div class="form">
       <login-box @afterLogin="afterLogin" @onfocus="onfocus" @onblur="onblur"></login-box>
@@ -41,6 +42,9 @@ export default {
 <style lang='scss' scoped>
  #login{
     transition: all 0.3s ease;
+    background-image: url('../../assets/_images/public/bg.png');
+    background-repeat: no-repeat;
+    background-size: 100% auto;
     .env-change{
       position: absolute;
       top: 0;
@@ -49,12 +53,20 @@ export default {
       height: 100px;
     }
     .icon-box{
-      width: 270px;
+      width: 180px;
       height: 173px;
-      margin: 25px auto 0;
+      margin: 0 auto;
+      text-align: center;
+      margin-top: 40px;
       img{
-        width: 100%;
-        height: 100%;
+        width: 50%;
+        height: 50%;
+      }
+      logo-title{
+        margin-top: 10px;
+        font-size: 5vw !important;
+        font-weight: bold;
+        color: #666666
       }
     }
     .locationMsg{

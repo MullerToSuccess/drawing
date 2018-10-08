@@ -71,6 +71,7 @@ export default {
       max-width: 60%;
       color: $header-text-color;
       // align-items: center;
+      border-bottom: 1px solid #e9ecf4;
       div {
         overflow: hidden;
         white-space: nowrap;

@@ -146,7 +146,7 @@ export default {
 <style  lang="scss" scoped>
 @import "@/style/variable.scss";
 .title-name{
-    position: fixed;
+    // position: fixed;
     top: 0;
     z-index: 50;
     width: 100%;
@@ -156,6 +156,7 @@ export default {
     font-size: $header-title;
     color: $header-text-color;
     background-color: $header-background-color;
+    border-bottom: 1px solid #e9ecf4;
   }
 .mint-header {
   height: 46px;

@@ -1,7 +1,7 @@
 'use strict'
 import API_ABSTRACT from '@/axios/_api.abstract'
 import jwt from '@/axios/jwt'
-import stroage from '@/store/stroage'
+import stroage from '@/store/storage'
 
 class API extends API_ABSTRACT {
   refreshAuthFetch(url, data, type = 'post', options = {'errorTips': true, 'api': 'api2', 'authJwt': false}) {

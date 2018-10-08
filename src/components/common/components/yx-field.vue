@@ -70,14 +70,15 @@ export default {
     getIcon () {
       let url = ''
       if (this.labelIcon === 'user') {
-        url = require('@/assets/_images/account/icon-user.png')
-      } else if (this.labelIcon === 'password') {
-        url = require('@/assets/_images/account/icon-pwd.png')
-      } else if (this.labelIcon === 'phone') {
-        url = require('@/assets/_images/account/phone.png')
-      } else {
-        url = require('@/assets/_images/account/sms.png')
+        url = require('@/assets/_images/public/user-name.png')
+      } else if(this.labelIcon === 'password') {
+        url = require('@/assets/_images/public/password.png')
       }
+      //  else if (this.labelIcon === 'phone') {
+      //   url = require('@/assets/_images/account/phone.png')
+      // } else {
+      //   url = require('@/assets/_images/account/sms.png')
+      // }
       return url
     }
   },

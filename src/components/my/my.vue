@@ -2,19 +2,19 @@
 <div class="my-wrapper">
   <div class="user-info-wrapper">
     <div class="user-image">
-        <img src="@/assets/logo.png">
+        <img src="@/assets/_images/public/audio.jpg">
       <span>{{ userName }}</span>
     </div>
   </div>
   <div class="item-wrapper">
     <mt-cell title="意见反馈" icon="more" is-link to="/my/feedback">
-      <img slot="icon" src="@/assets/logo.png" width="24" height="24">
+      <img slot="icon" src="@/assets/_images/my/feedback.png" width="24" height="24">
     </mt-cell>
     <mt-cell title="设置" icon="more" is-link to="/my/set">
-      <img slot="icon" src="@/assets/logo.png" width="24" height="24">
+      <img slot="icon" src="@/assets/_images/my/set.png" width="24" height="24">
     </mt-cell>
     <mt-cell title="关于我们" icon="more" is-link to="/my/about">
-      <img slot="icon" src="@/assets/logo.png" width="24" height="24">
+      <img slot="icon" src="@/assets/_images/my/about.png" width="24" height="24">
     </mt-cell>
   </div>
  <mt-tabbar v-model="selected" fixed>
@@ -74,6 +74,7 @@ export default {
 };
 </script>
 <style lang='scss' scoped>
+@import "@/style/vant-edit.scss";
 .my-wrapper {
   height: 90vh;
   background: rgb(242, 242, 242);
@@ -81,10 +82,10 @@ export default {
   overflow-y: auto;
   font-size: 4vw;
   .user-info-wrapper {
-    line-height: 30vh;
-    text-align: center;
+    line-height: 40vw;
+    // text-align: center;
     width: 100%;
-    height: 30vh;
+    height: 40vw;
     background: rgba(50, 207, 162, 1);
     color: #ffffff;
     img {
@@ -92,6 +93,12 @@ export default {
       width: 10vh;
     }
   }
+}
+.user-image {
+  background-image: url("../../assets/_images/my/bg.png");
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  padding-left: 30px 
 }
 .van-icon {
   color: #ffffff;

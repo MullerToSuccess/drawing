@@ -2,7 +2,7 @@
 import http from './_axios'
 import qs from 'qs'
 import { Toast } from 'vant'
-import store from '@/store/index'
+import store from '@/store/storage'
 
 class API_ABSTRACT {
   // 为对象添加属性

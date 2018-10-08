@@ -1,5 +1,5 @@
 import API_ABSTRACT from '@/axios/_api.abstract'
-import stroage from '@/store/stroage'
+import stroage from '@/store/storage'
 let apis = {
   'login': `client/stm/login`, // 56点登录接口
   'yxbLogin': `/user/session/init`, // 优学宝登录接口 用第三方token获取jwt
